@@ -6,7 +6,7 @@ services:
     user: "1000:1000"
     command: >
       sh -c "dotnet tool restore &&
-             dotnet watch run --urls http://0.0.0.0:8080 --no-launch-profile"
+             dotnet watch run --no-hot-reload --urls http://0.0.0.0:8080 --no-launch-profile"
     ports:
       - "8000:8080"
     volumes:
