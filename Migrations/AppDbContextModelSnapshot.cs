@@ -133,7 +133,10 @@ namespace ApiBe.Migrations
                     b.Property<DateTime>("ExpiresAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Token")
+                    b.Property<DateTime?>("RevokedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TokenHash")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -141,6 +144,9 @@ namespace ApiBe.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 

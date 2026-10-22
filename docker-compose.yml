@@ -11,12 +11,30 @@ services:
       - "8000:8080"
     volumes:
       - .:/src
+      - ${HOME}/.nuget/packages:/home/maulana/.nuget/packages
     environment:
       HOME: /tmp
       DOTNET_CLI_HOME: /tmp
+      NUGET_PACKAGES: /home/maulana/.nuget/packages
       ASPNETCORE_ENVIRONMENT: Development
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=apibe;Username=postgres;Password=postgres"
+      Seed__Admin__UserName: "${SEED_ADMIN_USERNAME}"
+      Seed__Admin__Email: "${SEED_ADMIN_EMAIL}"
+      Seed__Admin__FullName: "${SEED_ADMIN_FULLNAME}"
+      Seed__Admin__Password: "${SEED_ADMIN_PASSWORD}"
+
+      # BARU: user percobaan (role User)
+      Seed__User__UserName: "${SEED_USER_USERNAME}"
+      Seed__User__Email: "${SEED_USER_EMAIL}"
+      Seed__User__FullName: "${SEED_USER_FULLNAME}"
+      Seed__User__Password: "${SEED_USER_PASSWORD}"
+
+      Jwt__Key: "${JWT_KEY}"
+      Jwt__Issuer: "${JWT_ISSUER}"
+      Jwt__Audience: "${JWT_AUDIENCE}"
+      Jwt__ExpiresMinutes: "${JWT_EXPIRES_MINUTES}"
+      Jwt__RefreshExpiresHours: "${JWT_REFRESH_HOURS}"
     depends_on:
       db:
         condition: service_healthy
